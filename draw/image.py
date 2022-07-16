@@ -2,7 +2,7 @@ import pygame
 from .gzobject import GzObject
 
 class Image(GzObject):
-    def __init__(self, path, size=(50, 50), priority=90):
+    def __init__(self, path, size=(150, 150), priority=90):
         super().__init__(w=size[0], h=size[1], priority=priority)
         self.__original_image = pygame.image.load(path)
         self.__update()
