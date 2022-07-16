@@ -9,7 +9,9 @@ class Image(GzObject):
 
     def __update(self):
         self.__image = pygame.transform.scale(self.__original_image, (self.w, self.h))
+        self._updated = True
 
     def draw(self, screen, dx=0, dy=0):
-        if self.visible:
-            screen.blit(self.__image, (self.x+dx, self.y+dy))
+        if not self._updated: self.__update()
+        if not self.visible: return
+        screen.blit(self.__image, (self.x+dx, self.y+dy))
