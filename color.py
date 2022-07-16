@@ -1,6 +1,3 @@
-import sys
-import traceback
-
 red = (255, 0, 0)
 blue = (0, 255, 0)
 green = (0, 0, 255)
