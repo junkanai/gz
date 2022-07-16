@@ -10,7 +10,6 @@ class GzObject:
         self.__visible = visible    # draw or not
         self.__active = active      # can press or not
         self.__priority = priority
-        self.__active = 
         self._updated = True
 
 
