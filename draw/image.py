@@ -11,6 +11,7 @@ class Image(GzObject):
         self.__image = pygame.transform.scale(self.__original_image, (self.w, self.h))
         self._updated = True
 
+
     def draw(self, screen, dx=0, dy=0):
         if not self._updated: self.__update()
         if not self.visible: return

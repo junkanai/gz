@@ -2,14 +2,23 @@ import pygame
 
 
 class GzObject:
-    def __init__(self, x=0, y=0, w=100, h=100, visible=True, priority=90):
+    def __init__(self, x=0, y=0, w=100, h=100, visible=True, active=False, priority=90):
         self.__x = x
         self.__y = y
         self.__w = w
         self.__h = h
-        self.__visible = visible
+        self.__visible = visible    # draw or not
+        self.__active = active      # can press or not
         self.__priority = priority
+        self.__active = 
         self._updated = True
+
+
+    def _press_check(self, pos):
+        if not self.active: return False
+        if not self.__x < pos[0] <= self.__x + self.__w: return False
+        if not self.__y < pos[1] <= self.__y + self.__h: return False
+        return True
 
     @property
     def x(self): return self.__x
