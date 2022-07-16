@@ -16,7 +16,7 @@ class Window:
         if priority != None: unit.priority = priority
 
         self.__units.append(unit)
-    
+
     @property
     def w(self): return self.__w
 
@@ -35,7 +35,7 @@ class Window:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 for unit in reversed(self.__units):
-                    if unit._press_check(event.pos): break
+                    if unit._click_check(event.pos): break
 
         pygame.display.update()
         return True
