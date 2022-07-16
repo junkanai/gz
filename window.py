@@ -46,6 +46,14 @@ class Window:
         pygame.quit()
 
     @property
+    def mouse_xy(self):
+        return pygame.mouse.get_pos()
+
+    @property
+    def on_display(self):
+        return pygame.mouse.get_pressed()
+
+    @property
     def w(self): return self.__w
 
     @property
