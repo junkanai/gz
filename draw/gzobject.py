@@ -49,6 +49,15 @@ class GzObject:
         self._updated = False
 
     @property
+    def xy(self): return (self.__x, self.__h)
+
+    @xy.setter
+    def xy(self, n):
+        self.__x = n[0]
+        self.__y = n[1]
+        self._updated = False
+
+    @property
     def w(self): return self.__w
 
     @w.setter
@@ -62,6 +71,15 @@ class GzObject:
     @h.setter
     def h(self, n):
         self.__h = n
+        self._updated = False
+
+    @property
+    def wh(self): return (self.__w, self.__h)
+
+    @wh.setter
+    def wh(self, n):
+        self.__w = n[0]
+        self.__h = n[1]
         self._updated = False
 
     @property
@@ -103,3 +121,11 @@ class GzObject:
     def yc(self, n):
         self.y = n - self.h//2
         self._updated = False
+
+    @property
+    def xyc(self): return (self.xc, self.yc)
+
+    @xyc.setter
+    def xyc(self, n):
+        self.xc = n[0]
+        self.yc = n[1]
