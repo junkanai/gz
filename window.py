@@ -1,4 +1,5 @@
 import pygame
+from .draw.image import Image
 
 class Window:
     def __init__(self, caption="gz window", size=(600, 400), color=(0, 0, 0)):
@@ -11,6 +12,11 @@ class Window:
         self.color = color
         self.__working = True
         self.__units = []
+
+    def Image(self, path, size=(150, 150), active=False, priority=90):
+        image = Image(path, size, active, priority)
+        self.add(image)
+        return image
 
     def add(self, unit, priority=None):
         if priority != None: unit.priority = priority
