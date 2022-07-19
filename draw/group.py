@@ -14,7 +14,7 @@ class Group(GzObject, GzGroup):
     def _click_check(self, pos):
         return GzGroup._click_check(self, pos)
 
-    def draw(self, screen, dx=0, dy=0):
+    def draw(self, screen):
         if not self._updated:
             GzGroup._update(self)
         GzGroup.draw(self, screen)
