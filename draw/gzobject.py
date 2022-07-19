@@ -2,9 +2,11 @@ import pygame
 
 
 class GzObject:
-    def __init__(self, xy, wh, visible, active, priority):
+    def __init__(self, xy, wh, dxy, scale, visible, active, priority):
         (self.__x, self.__y) = xy
         (self.__w, self.__h) = wh
+        (self._dx, self._dy) = dxy
+        self.__scale = scale
         self.__visible = visible    # draw or not
         self.__active = active      # can press or not
         self.__priority = priority
@@ -15,14 +17,22 @@ class GzObject:
     def _click_check(self, pos):
         self._clicked = False
         if not self.__active: return False
-        if not (self.__x < pos[0] <= self.__x + self.__w): return False
-        if not (self.__y < pos[1] <= self.__y + self.__h): return False
+        if not (self.__x + self._dx < pos[0]): return False
+        if not (pos[0] <= self.__x + self._dx + self.__w): return False
+        if not (self.__y + self._dy < pos[1]): return False
+        if not (pos[1] <= self.__y + self._dy + self.__h): return False
         self._clicked = True
         return True
 
     def scale(self, rate):
+        if rate < 0: rate = 0
         self.__w = int(self.__w * rate)
         self.__h = int(self.__h * rate)
+        self._updated = False
+
+    def _dxy(self, dx, dy):
+        self._dx = dx
+        self._dy = dy
         self._updated = False
 
     @property
@@ -32,8 +42,10 @@ class GzObject:
     def touched(self):
         if not self.__active: return False
         pos = pygame.mouse.get_pos()
-        if not (self.__x < pos[0] <= self.__x + self.__w): return False
-        if not (self.__y < pos[1] <= self.__y + self.__h): return False
+        if not (self.__x + self._dx < pos[0]): return False
+        if not (pos[0] <= self.__x + self._dx + self.__w): return False
+        if not (self.__y + self._dy < pos[1]): return False
+        if not (pos[1] <= self.__y + self._dy + self.__h): return False
         return True
 
     @property
@@ -59,8 +71,8 @@ class GzObject:
 
     @xy.setter
     def xy(self, n):
-        self.__x = n[0]
-        self.__y = n[1]
+        self.x = n[0]
+        self.y = n[1]
         self._updated = False
 
     @property
@@ -86,11 +98,8 @@ class GzObject:
 
     @wh.setter
     def wh(self, n):
-        if len(n) == 2:
-            self.__w = n[0]
-            self.__h = n[1]
-        else:
-            raise ValueError
+        self.w = n[0]
+        self.h = n[1]
         self._updated = False
 
     @property

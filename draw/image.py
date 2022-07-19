@@ -10,15 +10,20 @@ class Image(GzObject):
                  active=False,
                  priority=90):
         iwh = (int(wh[0] * scale), int(wh[1] * scale))
-        super().__init__(xy, iwh, visible=visible, active=active, priority=priority)
+        super().__init__(xy, iwh, (0, 0), 1, visible, active, priority)
+        self.__path = path
         self.__original_image = pygame.image.load(path)
-        self.__update()
+        self._update()
 
-    def __update(self):
+    def copy(self):
+        return Image(self.__path, self.xy, self.wh, 1,
+                     self.visible, self.active, self.priority)
+
+    def _update(self):
         self.__image = pygame.transform.scale(self.__original_image, (self.w, self.h))
 
-    def draw(self, screen, dx=0, dy=0):
+    def draw(self, screen):
         self._clicked = False
-        if not self._updated: self.__update()
+        if not self._updated: self._update()
         if not self.visible: return
-        screen.blit(self.__image, (self.x+dx, self.y+dy))
+        screen.blit(self.__image, (self.x+self._dx, self.y+self._dy))
