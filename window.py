@@ -1,27 +1,28 @@
 import pygame
 from .draw.image import Image
 
+def sort_priority(unit): return unit.priority
+
 class Window:
-    def __init__(self, caption="gz window", size=(600, 400), color=(0, 0, 0)):
+    def __init__(self, caption="gz window", wh=(600, 400), color=(0, 0, 0)):
         pygame.init()
-        self.__screen = pygame.display.set_mode(size)
+        self.__screen = pygame.display.set_mode(wh)
         pygame.display.set_caption(caption)
 
-        self.__h = size[1]
-        self.__w = size[0]
+        (self.__w, self.__h) = wh
         self.color = color
         self.__working = True
         self.__units = []
 
-    def Image(self, path, size=(150, 150), active=False, priority=90):
-        image = Image(path, size, active, priority)
-        self.add(image)
-        return image
-
     def add(self, unit, priority=None):
-        if priority != None: unit.priority = priority
-
-        self.__units.append(unit)
+        try:
+            if not unit._is_GzObject: return
+            if priority != None: unit.priority = priority
+            self.__units.append(unit)
+            self.__units.sort(key=sort_priority)
+            self.__units.reverse()
+        except AttributeError:
+            raise AttributeError("Cannot add this type of object")
 
     @property
     def update(self):

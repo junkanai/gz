@@ -2,18 +2,13 @@ import pygame
 
 
 class GzObject:
-    def __init__(self, xy=(0, 0)
-                       wh=(100, 100)
-                       visible=True,
-                       active=False,
-                       priority=90):
-        self.__x = xy[0]
-        self.__y = xy[1]
-        self.__w = wh[0]
-        self.__h = wh[1]
+    def __init__(self, xy, wh, visible, active, priority):
+        (self.__x, self.__y) = xy
+        (self.__w, self.__h) = wh
         self.__visible = visible    # draw or not
         self.__active = active      # can press or not
         self.__priority = priority
+
         self._clicked= False
         self._updated = True
 
@@ -46,6 +41,7 @@ class GzObject:
 
     @x.setter
     def x(self, n):
+        if n < 0: n = 0
         self.__x = n
         self._updated = False
 
@@ -54,6 +50,7 @@ class GzObject:
 
     @y.setter
     def y(self, n):
+        if n < 0: n = 0
         self.__y = n
         self._updated = False
 
@@ -71,6 +68,7 @@ class GzObject:
 
     @w.setter
     def w(self, n):
+        if n < 0: n = 0
         self.__w = n
         self._updated = False
 
@@ -79,6 +77,7 @@ class GzObject:
 
     @h.setter
     def h(self, n):
+        if n < 0: n = 0
         self.__h = n
         self._updated = False
 
@@ -141,3 +140,6 @@ class GzObject:
     def xyc(self, n):
         self.xc = n[0]
         self.yc = n[1]
+
+    @property
+    def _is_GzObject(self): return True
