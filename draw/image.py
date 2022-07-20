@@ -26,4 +26,4 @@ class Image(GzObject):
         self._clicked = False
         if not self._updated: self._update()
         if not self.visible: return
-        screen.blit(self.__image, (self.x+self._dx, self.y+self._dy))
+        screen.blit(self.__image, (self.ax, self.ay))

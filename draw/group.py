@@ -16,5 +16,5 @@ class Group(GzObject, GzGroup):
 
     def draw(self, screen):
         if not self._updated:
-            GzGroup._update(self)
+            GzGroup._update(self, self.ax, self.ay)
         GzGroup.draw(self, screen)

@@ -18,7 +18,7 @@ class Rect(GzObject):
                     self.visible, self.active, self.priority)
 
     def _update(self):
-        self.__rect = pygame.Rect(self.x+self._dx, self.y+self._dy, self.w, self.h)
+        self.__rect = pygame.Rect(self.ax, self.ay, self.w, self.h)
 
     def draw(self, screen):
         self._clicked = False

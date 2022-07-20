@@ -38,13 +38,6 @@ class Window(GzGroup):
         else:
             raise ValueError
 
-    def __del__(self):
-        pygame.quit()
-
-    @property
-    def on_display(self):
-        return pygame.mouse.get_pressed()
-
     @property
     def w(self): return self.__w
 
@@ -72,3 +65,8 @@ class Window(GzGroup):
     @property
     def xy(self): return pygame.mouse.get_pos()
 
+    @xy.setter
+    def xy(self, pos): pygame.mouse.set_pos(pos)
+
+    def __del__(self):
+        pygame.quit()
