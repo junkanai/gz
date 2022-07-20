@@ -52,3 +52,10 @@ class GzGroup:
                     self.__units.pop(i)
                     break
         return self
+
+    """
+    def draw(self, screen):
+        for key, value in self.__dict__.items():
+            if key.startswith("_Window__"): continue
+            print(key, value)
+    """

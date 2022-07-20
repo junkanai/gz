@@ -1,5 +1,6 @@
 import pygame
 from .gzobject import GzObject
+from ..sound.sound import Sound
 
 class Image(GzObject):
     def __init__(self, path,
